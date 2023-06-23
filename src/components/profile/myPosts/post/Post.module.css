@@ -1,0 +1,11 @@
+.item {
+    color: bisque;
+}
+
+.avatarContainer {
+    width: 50px;
+    height: 50px;
+    background-color: #a4b3cc;
+    display: inline-block;
+    border-radius: 30px;
+}
