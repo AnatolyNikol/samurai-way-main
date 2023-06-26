@@ -3,7 +3,7 @@ import style from "./Post.module.css";
 
 type PostPropsType = {
     message: string
-    likeCounts: number
+    likesCount: number
 }
 
 function Post(props: PostPropsType) {
@@ -12,7 +12,7 @@ function Post(props: PostPropsType) {
             <div className={style.avatarContainer}></div>
             {props.message}
             <div>
-                <span>Like: {props.likeCounts}</span>
+                <span>Like: </span>{props.likesCount}
             </div>
 
         </div>

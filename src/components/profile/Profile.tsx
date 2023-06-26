@@ -4,7 +4,7 @@ import MyPosts from "./myPosts/MyPosts";
 
 function Profile() {
     return (
-        <div className={style.content}>
+        <div>
             <div className={style.imgContainer}></div>
             <div className={style.avatarContainer}>ava + description</div>
             <MyPosts/>
