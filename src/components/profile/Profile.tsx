@@ -1,12 +1,11 @@
 import React from "react";
-import style from './Profile.module.css';
 import MyPosts from "./myPosts/MyPosts";
+import ProfileInfo from "./profileInfo/ProfileInfo";
 
 function Profile() {
     return (
         <div>
-            <div className={style.imgContainer}></div>
-            <div className={style.avatarContainer}>ava + description</div>
+            <ProfileInfo/>
             <MyPosts/>
         </div>
     )
