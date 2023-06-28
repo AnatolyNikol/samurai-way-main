@@ -8,7 +8,11 @@ type MessagePropsType = {
 
 function Message(props: MessagePropsType) {
     return (
-        <div className={style.message}>{props.message}</div>
+        <div className={style.messageContainer}>
+            <div className={style.avatarContainer}></div>
+            <div className={style.message}>{props.message}</div>
+        </div>
+        // <div className={style.message}>{props.message}</div>
     )
 }
 

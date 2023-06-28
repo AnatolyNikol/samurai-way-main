@@ -1,14 +1,12 @@
 import React from "react";
 import style from "./MyPosts.module.css";
 import Post from "./post/Post";
-
 import {PostsType} from "../../../redux/state";
 
 
 
 type MyPostsPropsType = {
     posts: Array<PostsType>
-    // state: StateType
 }
 
 function MyPosts(props: MyPostsPropsType) {

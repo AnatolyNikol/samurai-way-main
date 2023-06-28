@@ -13,6 +13,7 @@ function DialogItem(props: DialogItemPropsType) {
 
     return (
         <div className={style.dialog}>
+            <div className={style.avatarContainer}></div>
             <NavLink to={path} activeClassName={style.active}>{props.name}</NavLink>
         </div>
     )
