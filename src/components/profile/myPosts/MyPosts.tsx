@@ -22,6 +22,9 @@ function MyPosts(props: MyPostsPropsType) {
         if (text) {
             props.addPost(text)
         }
+        if (newPostElement.current) {
+            newPostElement.current.value = ''
+        }
     }
 
     return (
