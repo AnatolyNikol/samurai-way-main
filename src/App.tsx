@@ -16,6 +16,8 @@ type AppPropsType = {
     state: StateType
     addPost: () => void
     updateNewPostText: (newText: string) => void
+    addMessage: () => void
+    updateNewMessageText: (message: string) => void
 }
 
 function App(props: AppPropsType) {
@@ -31,7 +33,11 @@ function App(props: AppPropsType) {
                         addPost={props.addPost}
                         updateNewPostText = {props.updateNewPostText}
                     />}/>
-                    <Route path="/dialogs" render={() => <Dialogs state={props.state.dialogsPage}/>}/>
+                    <Route path="/dialogs" render={() => <Dialogs
+                        state={props.state.dialogsPage}
+                        addMessage={props.addMessage}
+                        updateNewMessageText={props.updateNewMessageText}
+                    />}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>

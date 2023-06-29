@@ -8,6 +8,8 @@ import {DialogsPageType} from "../../redux/state";
 
 type DialogsPropsType = {
     state: DialogsPageType
+    addMessage: () => void
+    updateNewMessageText: (message: string) => void
 }
 
 function Dialogs(props: DialogsPropsType) {
@@ -22,8 +24,14 @@ function Dialogs(props: DialogsPropsType) {
     )
 
     const addMessage = () => {
+        props.addMessage();
+    }
+
+    const onMessageChange = () => {
         let message = newMessageText.current?.value
-        alert(message)
+        if (message) {
+            props.updateNewMessageText(message)
+        }
     }
 
     return (
@@ -34,8 +42,15 @@ function Dialogs(props: DialogsPropsType) {
             <div className={style.messages}>
                 {messagesElements}
                 <div>
-                    <textarea ref={newMessageText}></textarea>
-                    <button onClick={addMessage}>add text</button>
+                    <div>
+                        <textarea
+                            ref={newMessageText}
+                            value={props.state.newMessageText}
+                            onChange={onMessageChange} />
+                    </div>
+                    <div>
+                        <button onClick={addMessage}>add text</button>
+                    </div>
                 </div>
             </div>
         </div>
