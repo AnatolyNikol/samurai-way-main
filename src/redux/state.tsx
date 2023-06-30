@@ -40,23 +40,32 @@ export type StateType = {
     sidebar: SidebarType
 }
 
-export type AddPostActionType = {
-    type: 'ADD-POST'
-}
+// export type AddPostActionType = {
+//     type: 'ADD-POST'
+// }
 
-export type UpdateNewPostTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
-}
+export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 
-export type AddMessageActionType = {
-    type: 'ADD-MESSAGE'
-}
+// export type UpdateNewPostTextActionType = {
+//     type: 'UPDATE-NEW-POST-TEXT'
+//     newText: string
+// }
 
-export type UpdateNewMessageTextActionType = {
-    type: 'UPDATE-MESSAGE-TEXT'
-    newMessageText: string
-}
+export type UpdateNewPostTextActionType = ReturnType<typeof UpdateNewPostTextActionCreator>
+
+
+// export type AddMessageActionType = {
+//     type: 'ADD-MESSAGE'
+// }
+
+export type AddMessageActionType  = ReturnType<typeof AddMessageActionCreator>
+
+// export type UpdateNewMessageTextActionType = {
+//     type: 'UPDATE-MESSAGE-TEXT'
+//     newMessageText: string
+// }
+
+export type UpdateNewMessageTextActionType = ReturnType<typeof UpdateNewMessageTextActionCreator>
 
 export type ActionsTypes =
     AddPostActionType
@@ -70,10 +79,6 @@ export type StoreType = {
     _callSubscriber: (state: StateType) => void
     getState: () => StateType
     subscribe: (observer: (state: StateType) => void) => void
-    // addPost: () => void
-    // updateNewPostText: (newText: string) => void
-    // addMessage: () => void
-    // updateNewMessageText: (newMessageText: string) => void
     dispatch: (action: ActionsTypes) => void
 }
 
@@ -118,25 +123,6 @@ let store: StoreType = {
     subscribe(observer) {
         this._callSubscriber = observer;
     },
-    // addPost() {
-    //     let newPost = {id: 5, message: this._state.profilePage.newPostText, likesCount: 0};
-    //     this._state.profilePage.posts.push(newPost);
-    //     this._state.profilePage.newPostText = '';
-    //     this._callSubscriber(this._state);
-    // },
-    // updateNewPostText (newText: string) {
-    //     this._state.profilePage.newPostText = newText
-    //     this._callSubscriber(this._state)
-    // },
-    // addMessage() {
-    //     let message = {id: 4, message: this._state.dialogsPage.newMessageText}
-    //     this._state.dialogsPage.messages.push(message)
-    //     this._callSubscriber(this._state);
-    // },
-    // updateNewMessageText(newMessageText: string) {
-    //     this._state.dialogsPage.newMessageText = newMessageText
-    //     this._callSubscriber(this._state)
-    // },
     dispatch(action) {
         if (action.type === 'ADD-POST') {
             let newPost = {id: 5, message: this._state.profilePage.newPostText, likesCount: 0};
@@ -157,5 +143,31 @@ let store: StoreType = {
         }
     }
 }
+
+export const addPostActionCreator = () => {
+    return {
+        type: 'ADD-POST'
+    } as const
+}
+export const UpdateNewPostTextActionCreator = (text: string) => {
+    return {
+        type: 'UPDATE-NEW-POST-TEXT',
+        newText: text
+    } as const
+}
+
+export const AddMessageActionCreator = () => {
+    return {
+        type: 'ADD-MESSAGE'
+    } as const
+}
+
+export const UpdateNewMessageTextActionCreator = (message: string) => {
+    return {
+        type: 'UPDATE-MESSAGE-TEXT',
+        newMessageText: message
+    } as const
+}
+
 
 export default store;
