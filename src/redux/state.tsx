@@ -89,7 +89,7 @@ let store: StoreType = {
                 {id: 1, message: 'Hi, how are you?', likesCount: 15},
                 {id: 1, message: 'It\'s my first post', likesCount: 20}
             ],
-            newPostText: 'type a text'
+            newPostText: ''
         },
         dialogsPage: {
             dialogs: [
@@ -105,7 +105,7 @@ let store: StoreType = {
                 {id: 2, message: 'How is your it-kamasutra?'},
                 {id: 3, message: 'Yo'}
             ],
-            newMessageText: 'enter new message'
+            newMessageText: ''
         },
         sidebar: {
             friends: [
@@ -115,7 +115,7 @@ let store: StoreType = {
             ]
         }
     },
-    _callSubscriber(state: StateType) {
+    _callSubscriber(_state: StateType) {
     },
     getState() {
         return this._state
@@ -137,7 +137,7 @@ let store: StoreType = {
             this._state.dialogsPage.messages.push(message)
             this._state.dialogsPage.newMessageText = '';
             this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-MESSAGE-TEXT') {
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
             this._state.dialogsPage.newMessageText = action.newMessageText
             this._callSubscriber(this._state)
         }
@@ -164,7 +164,7 @@ export const AddMessageActionCreator = () => {
 
 export const UpdateNewMessageTextActionCreator = (message: string) => {
     return {
-        type: 'UPDATE-MESSAGE-TEXT',
+        type: 'UPDATE-NEW-MESSAGE-TEXT',
         newMessageText: message
     } as const
 }

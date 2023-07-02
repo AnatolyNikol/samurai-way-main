@@ -39,7 +39,11 @@ function MyPosts(props: MyPostsPropsType) {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement} value={props.newPostText} onChange={onPostChange}/>
+                    <textarea
+                        placeholder='type a text'
+                        ref={newPostElement}
+                        value={props.newPostText}
+                        onChange={onPostChange}/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>
