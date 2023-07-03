@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./MyPosts.module.css";
 import Post from "./post/Post";
-import {ActionsTypes,PostsType} from "../../../redux/state";
+import {ActionsTypes,PostsType} from "../../../redux/store";
 import {addPostActionCreator, UpdateNewPostTextActionCreator} from "../../../redux/profileReducer";
 
 
@@ -20,16 +20,12 @@ function MyPosts(props: MyPostsPropsType) {
         <Post message={post.message} likesCount={post.likesCount}/>)
 
     const addPost = () => {
-        // let action:ActionsTypes = {type: 'ADD-POST'}
         props.dispatch(addPostActionCreator())
     }
 
     const onPostChange = () => {
         let text = newPostElement.current?.value
         if (text) {
-            // let action:ActionsTypes = {
-            //     type: 'UPDATE-NEW-POST-TEXT',
-            //     newText: text}
             let action = UpdateNewPostTextActionCreator(text);
             props.dispatch(action)
         }

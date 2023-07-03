@@ -8,7 +8,7 @@ import {Route} from "react-router-dom";
 import News from "./components/news/News";
 import Music from "./components/music/Music";
 import Settings from "./components/settings/Settings";
-import {ActionsTypes, StateType} from "./redux/state";
+import {ActionsTypes, StateType} from "./redux/store";
 import Sidebar from "./components/sidebar/Sidebar";
 
 
@@ -18,7 +18,6 @@ type AppPropsType = {
 }
 
 function App(props: AppPropsType) {
-
     return (
         <div className="app-wrapper">
             <Header/>
