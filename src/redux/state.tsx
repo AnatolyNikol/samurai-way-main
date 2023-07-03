@@ -72,7 +72,7 @@ let store: StoreType = {
         profilePage: {
             posts: [
                 {id: 1, message: 'Hi, how are you?', likesCount: 15},
-                {id: 1, message: 'It\'s my first post', likesCount: 20}
+                {id: 2, message: 'It\'s my first post', likesCount: 20}
             ],
             newPostText: ''
         },
