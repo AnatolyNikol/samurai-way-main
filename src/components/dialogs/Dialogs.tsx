@@ -8,27 +8,44 @@ import {AddMessageActionCreator, UpdateNewMessageTextActionCreator} from "../../
 
 
 type DialogsPropsType = {
+    updateNewMessageText: (message: string) => void
+    addMessage: () => void
     state: DialogsPageType
-    dispatch: (action: ActionsTypes) => void
+    // dispatch: (action: ActionsTypes) => void
+    dialogsPage: DialogsPageType
 }
 
 function Dialogs(props: DialogsPropsType) {
 
-    let dialogsElements =  props.state.dialogs.map(dialog =>
-            <DialogItem id={dialog.id} name={dialog.name}/>
-        )
-    let messagesElements = props.state.messages.map(message =>
+    let state = props.dialogsPage;
+
+    // let dialogsElements =  props.state.dialogs.map(dialog =>
+    //         <DialogItem id={dialog.id} name={dialog.name}/>
+    //     )
+    // let messagesElements = props.state.messages.map(message =>
+    //     <Message id={message.id} message={message.message}/>
+    // )
+
+    let dialogsElements =  state.dialogs.map(dialog =>
+        <DialogItem id={dialog.id} name={dialog.name}/>
+    )
+    let messagesElements = state.messages.map(message =>
         <Message id={message.id} message={message.message}/>
     )
 
+
     const addMessage = () => {
-        props.dispatch(AddMessageActionCreator())
+        // props.dispatch(AddMessageActionCreator())
+        props.addMessage();
     }
 
     const onMessageChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         let message = event.currentTarget.value
+        // if (message) {
+        //     props.dispatch(UpdateNewMessageTextActionCreator(message))
+        // }
         if (message) {
-            props.dispatch(UpdateNewMessageTextActionCreator(message))
+            props.updateNewMessageText(message);
         }
     }
 

@@ -6,9 +6,11 @@ import {addPostActionCreator, UpdateNewPostTextActionCreator} from "../../../red
 
 
 type MyPostsPropsType = {
+    updateNewPostText: (text: string) => void
+    addPost: () => void
     posts: Array<PostsType>
     newPostText: string
-    dispatch: (action: ActionsTypes) => void
+    // dispatch: (action: ActionsTypes) => void
 }
 
 
@@ -19,15 +21,19 @@ function MyPosts(props: MyPostsPropsType) {
     let postsElements = props.posts.map(post =>
         <Post message={post.message} likesCount={post.likesCount}/>)
 
-    const addPost = () => {
-        props.dispatch(addPostActionCreator())
+    const onAddPost = () => {
+        // props.dispatch(addPostActionCreator())
+        props.addPost();
     }
 
     const onPostChange = () => {
         let text = newPostElement.current?.value
+        // if (text) {
+        //     let action = UpdateNewPostTextActionCreator(text);
+        //     props.dispatch(action)
+        // }
         if (text) {
-            let action = UpdateNewPostTextActionCreator(text);
-            props.dispatch(action)
+            props.updateNewPostText(text);
         }
     }
 
@@ -43,7 +49,7 @@ function MyPosts(props: MyPostsPropsType) {
                         onChange={onPostChange}/>
                 </div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={onAddPost}>Add post</button>
                 </div>
             </div>
             <div className={style.posts}>
