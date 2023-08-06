@@ -7,7 +7,7 @@ import MyPostsContainer from "./myPosts/MyPostsContainer";
 type ProfilePropsType = {
     // profilePage: ProfilePageType
     // dispatch: (action: ActionsTypes) => void
-    store: StoreType
+    // store: StoreType
 }
 
 function Profile(props: ProfilePropsType) {
@@ -15,7 +15,8 @@ function Profile(props: ProfilePropsType) {
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer store={props.store} />
+            {/*<MyPostsContainer store={props.store} />*/}
+            <MyPostsContainer />
             {/*<MyPosts*/}
             {/*    posts={props.profilePage.posts}*/}
             {/*    newPostText={props.profilePage.newPostText}*/}

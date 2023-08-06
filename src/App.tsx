@@ -15,8 +15,8 @@ import DialogsContainer from "./components/dialogs/DialogsContainer";
 
 type AppPropsType = {
     state: StateType
-    store: StoreType
-    dispatch: (action: ActionsTypes) => void
+    // store: StoreType
+    // dispatch: (action: ActionsTypes) => void
 }
 
 function App(props: AppPropsType) {
@@ -30,7 +30,7 @@ function App(props: AppPropsType) {
                     <Profile
                         // profilePage={props.state.profilePage}
                         // dispatch={props.dispatch}
-                        store={props.store}
+                        // store={props.store}
                     />
                 }/>
                 <Route path="/dialogs" render={() =>
@@ -38,7 +38,8 @@ function App(props: AppPropsType) {
                     //     state={props.state.dialogsPage}
                     //     dispatch={props.dispatch}
                     // />
-                    <DialogsContainer store={props.store}/>
+                    // <DialogsContainer store={props.store}/>
+                    <DialogsContainer />
                 }/>
                 <Route path="/news" render={() => <News/>}/>
                 <Route path="/music" render={() => <Music/>}/>
