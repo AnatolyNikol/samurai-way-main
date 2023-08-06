@@ -10,7 +10,7 @@ import {AddMessageActionCreator, UpdateNewMessageTextActionCreator} from "../../
 type DialogsPropsType = {
     updateNewMessageText: (message: string) => void
     addMessage: () => void
-    state: DialogsPageType
+    // state: DialogsPageType
     // dispatch: (action: ActionsTypes) => void
     dialogsPage: DialogsPageType
 }
@@ -60,7 +60,8 @@ function Dialogs(props: DialogsPropsType) {
                     <div>
                         <textarea
                             placeholder='enter new message'
-                            value={props.state.newMessageText}
+                            // value={props.state.newMessageText}
+                            value={state.newMessageText}
                             onChange={onMessageChange} />
                     </div>
                     <div>

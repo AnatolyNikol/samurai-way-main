@@ -39,7 +39,7 @@ function App(props: AppPropsType) {
                     //     dispatch={props.dispatch}
                     // />
                     // <DialogsContainer store={props.store}/>
-                    <DialogsContainer />
+                    <DialogsContainer/>
                 }/>
                 <Route path="/news" render={() => <News/>}/>
                 <Route path="/music" render={() => <Music/>}/>
