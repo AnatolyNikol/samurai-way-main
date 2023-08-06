@@ -2,29 +2,18 @@ import React, {ChangeEvent} from "react";
 import style from './Dialogs.module.css'
 import DialogItem from "./dialogItem/DialogItem";
 import Message from "./message/Message";
-import {ActionsTypes, DialogsPageType} from "../../redux/store";
-import {AddMessageActionCreator, UpdateNewMessageTextActionCreator} from "../../redux/dialogsReducer";
-
+import {DialogsPageType} from "../../redux/store";
 
 
 type DialogsPropsType = {
     updateNewMessageText: (message: string) => void
     addMessage: () => void
-    // state: DialogsPageType
-    // dispatch: (action: ActionsTypes) => void
     dialogsPage: DialogsPageType
 }
 
 function Dialogs(props: DialogsPropsType) {
 
     let state = props.dialogsPage;
-
-    // let dialogsElements =  props.state.dialogs.map(dialog =>
-    //         <DialogItem id={dialog.id} name={dialog.name}/>
-    //     )
-    // let messagesElements = props.state.messages.map(message =>
-    //     <Message id={message.id} message={message.message}/>
-    // )
 
     let dialogsElements =  state.dialogs.map(dialog =>
         <DialogItem id={dialog.id} name={dialog.name}/>
@@ -35,15 +24,11 @@ function Dialogs(props: DialogsPropsType) {
 
 
     const addMessage = () => {
-        // props.dispatch(AddMessageActionCreator())
         props.addMessage();
     }
 
     const onMessageChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         let message = event.currentTarget.value
-        // if (message) {
-        //     props.dispatch(UpdateNewMessageTextActionCreator(message))
-        // }
         if (message) {
             props.updateNewMessageText(message);
         }
@@ -60,7 +45,6 @@ function Dialogs(props: DialogsPropsType) {
                     <div>
                         <textarea
                             placeholder='enter new message'
-                            // value={props.state.newMessageText}
                             value={state.newMessageText}
                             onChange={onMessageChange} />
                     </div>
