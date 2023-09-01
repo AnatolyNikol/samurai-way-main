@@ -9,6 +9,7 @@ import Music from "./components/music/Music";
 import Settings from "./components/settings/Settings";
 import {DialogsContainer} from "./components/dialogs/DialogsContainer";
 import {SidebarContainer} from "./components/sidebar/SidebarContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
 
 
@@ -24,6 +25,9 @@ function App() {
                 }/>
                 <Route path="/dialogs" render={() =>
                     <DialogsContainer/>
+                }/>
+                <Route path="/users" render={() =>
+                    <UsersContainer/>
                 }/>
                 <Route path="/news" render={() => <News/>}/>
                 <Route path="/music" render={() => <Music/>}/>
