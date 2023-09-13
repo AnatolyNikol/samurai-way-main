@@ -21,10 +21,16 @@ export type userType = {
 
 export type usersType = {
     users: Array<userType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 let initialState = {
-    users: []
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1
 }
 export const usersReducer = (state: usersType = initialState, action: ActionsTypes) => {
     switch (action.type) {
@@ -48,8 +54,20 @@ export const usersReducer = (state: usersType = initialState, action: ActionsTyp
         case 'SET-USERS': {
             return {
                 ...state,
-                users: [...state.users, ...action.users]
+                users: action.users
             };
+        }
+        case 'SET-CURRENT-PAGE': {
+            return {
+                ...state,
+                currentPage: action.currentPage
+            }
+        }
+        case 'SET-TOTAL-USERS-COUNT': {
+            return {
+                ...state,
+                totalUsersCount: action.count
+            }
         }
         default:
             return state;
@@ -59,6 +77,8 @@ export const usersReducer = (state: usersType = initialState, action: ActionsTyp
 export type FollowActionType = ReturnType<typeof followAC>
 export type UnfollowActionType = ReturnType<typeof unFollowAC>
 export type SetUsersActionType = ReturnType<typeof setUsersAC>
+export type setCurrentPageActionType = ReturnType<typeof setCurrentPageAC>
+export type setTotalUsersCountActionType = ReturnType<typeof setTotalUsersCountAC>
 
 export const followAC = (userId: number) => {
     return {
@@ -78,5 +98,19 @@ export const setUsersAC = (users: Array<userType>) => {
     return {
         type: 'SET-USERS',
         users: users
+    } as const
+}
+
+export const setCurrentPageAC = (currentPage: number) => {
+    return {
+        type: 'SET-CURRENT-PAGE',
+        currentPage: currentPage
+    } as const
+}
+
+export const setTotalUsersCountAC = (count: number) => {
+    return {
+        type: 'SET-TOTAL-USERS-COUNT',
+        count: count
     } as const
 }

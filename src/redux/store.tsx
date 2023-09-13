@@ -1,7 +1,13 @@
 import {AddPostActionType, profileReducer, UpdateNewPostTextActionType} from "./profileReducer";
 import {AddMessageActionType, dialogsReducer, UpdateNewMessageTextActionType} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
-import {FollowActionType, SetUsersActionType, UnfollowActionType} from "./usersReducer";
+import {
+    FollowActionType,
+    setCurrentPageAC,
+    setCurrentPageActionType, setTotalUsersCountActionType,
+    SetUsersActionType,
+    UnfollowActionType
+} from "./usersReducer";
 
 export type PostsType = {
     id: number
@@ -53,6 +59,8 @@ export type ActionsTypes =
     | FollowActionType
     | UnfollowActionType
     | SetUsersActionType
+    | setCurrentPageActionType
+    | setTotalUsersCountActionType
 
 
 export type StoreType = {
