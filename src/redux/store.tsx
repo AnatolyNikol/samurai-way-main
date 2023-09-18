@@ -3,7 +3,6 @@ import {AddMessageActionType, dialogsReducer, UpdateNewMessageTextActionType} fr
 import {sidebarReducer} from "./sidebarReducer";
 import {
     FollowActionType,
-    setCurrentPageAC,
     setCurrentPageActionType, setTotalUsersCountActionType,
     SetUsersActionType,
     UnfollowActionType

@@ -6,6 +6,11 @@
 
 .selectedPage {
     font-weight: bold;
+    padding-right: 10px;
+}
+
+.page {
+    padding-right: 10px;
 }
 
 .pagesContainer {
