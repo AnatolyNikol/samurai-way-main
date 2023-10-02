@@ -3,7 +3,7 @@ import {AddMessageActionType, dialogsReducer, UpdateNewMessageTextActionType} fr
 import {sidebarReducer} from "./sidebarReducer";
 import {
     FollowActionType,
-    setCurrentPageActionType, setTotalUsersCountActionType,
+    setCurrentPageActionType, toggleIsFetchingActionType, setTotalUsersCountActionType,
     SetUsersActionType,
     UnfollowActionType
 } from "./usersReducer";
@@ -60,6 +60,7 @@ export type ActionsTypes =
     | SetUsersActionType
     | setCurrentPageActionType
     | setTotalUsersCountActionType
+    | toggleIsFetchingActionType
 
 
 export type StoreType = {
