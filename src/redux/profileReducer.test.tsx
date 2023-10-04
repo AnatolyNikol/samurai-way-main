@@ -1,4 +1,4 @@
-import {addPostActionCreator, profileReducer, UpdateNewPostTextActionCreator} from "./profileReducer";
+import {addPostActionCreator, profileReducer, updateNewPostTextActionCreator} from "./profileReducer";
 
 test('profile reducer should add new post', () => {
 
@@ -7,7 +7,27 @@ test('profile reducer should add new post', () => {
             {id: 1, message: 'Hi, how are you?', likesCount: 15},
             {id: 2, message: 'It\'s my first post', likesCount: 20}
         ],
-        newPostText: ''
+        newPostText: '',
+        profile: {
+            contacts: {
+                facebook: "facebook.com",
+                website: '',
+                vk: "vk.com/dimych",
+                twitter: "https://twitter.com/@sdf",
+                instagram: "instagra.com/sds",
+                youtube: '',
+                github: "github.com",
+                mainLink: ''
+            },
+            lookingForAJob: true,
+            lookingForAJobDescription: "не ищу, а дурачусь",
+            fullName: "samurai dimych",
+            userId: 2,
+            photos: {
+                small: "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
+                large: "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
+            }
+        }
     };
 
     const newPost = {id: 5, message: startState.newPostText, likesCount: 0};
@@ -35,10 +55,30 @@ test('profile reducer should update new post text', () => {
             {id: 1, message: 'Hi, how are you?', likesCount: 15},
             {id: 2, message: 'It\'s my first post', likesCount: 20}
         ],
-        newPostText: ''
+        newPostText: '',
+        profile: {
+            contacts: {
+                facebook: "facebook.com",
+                website: '',
+                vk: "vk.com/dimych",
+                twitter: "https://twitter.com/@sdf",
+                instagram: "instagra.com/sds",
+                youtube: '',
+                github: "github.com",
+                mainLink: ''
+            },
+            lookingForAJob: true,
+            lookingForAJobDescription: "не ищу, а дурачусь",
+            fullName: "samurai dimych",
+            userId: 2,
+            photos: {
+                small: "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
+                large: "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
+            }
+        }
     };
 
-    const action = UpdateNewPostTextActionCreator('new text')
+    const action = updateNewPostTextActionCreator('new text')
 
     const endState = profileReducer(startState, action)
 
