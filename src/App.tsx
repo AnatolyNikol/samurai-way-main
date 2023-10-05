@@ -20,7 +20,7 @@ function App() {
             <Navbar/>
             <SidebarContainer/>
             <div className="app-wrapper-content">
-                <Route path="/profile" render={() =>
+                <Route path="/profile:userId?" render={() =>
                     <ProfileContainer/>
                 }/>
                 <Route path="/dialogs" render={() =>

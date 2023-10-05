@@ -17,6 +17,7 @@ function ProfileInfo(props: profileInfoPropsType) {
             <div className={style.imgContainer}></div>
             <div className={style.avatarContainer}>
                 <img src={props.profile.photos.small}/>
+                <span> {props.profile.fullName} </span>
                 ava + description
             </div>
         </div>
