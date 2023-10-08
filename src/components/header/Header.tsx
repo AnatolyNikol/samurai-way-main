@@ -1,10 +1,26 @@
 import React from 'react';
 import style from './Header.module.css';
+import {NavLink} from "react-router-dom";
 
-function Header() {
+type HeaderPropsType = {
+    login: string | null,
+    isAuth: boolean,
+    setAuthUserData: (id: number, email: string, login: string) => void
+}
+
+
+function Header(props: HeaderPropsType) {
     return (
         <header className={style.header}>
-            <img src="https://static.vecteezy.com/system/resources/previews/007/636/859/original/community-logo-design-free-vector.jpg" alt=""/>
+            <img
+                src="https://static.vecteezy.com/system/resources/previews/007/636/859/original/community-logo-design-free-vector.jpg"
+                alt=""/>
+            <div className={style.loginBlock}>
+                {props.isAuth
+                    ? props.login
+                    : <NavLink to={'/login'}>Login</NavLink>
+                }
+            </div>
         </header>
     )
 }

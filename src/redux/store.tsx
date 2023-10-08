@@ -12,6 +12,7 @@ import {
     SetUsersActionType,
     UnfollowActionType
 } from "./usersReducer";
+import {SetUserDataActionType} from "./auth-reducer";
 
 export type PostsType = {
     id: number
@@ -68,6 +69,7 @@ export type ActionsTypes =
     | setTotalUsersCountActionType
     | toggleIsFetchingActionType
     | SetUserProfileActionType
+    | SetUserDataActionType
 
 
 export type StoreType = {

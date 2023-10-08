@@ -10,13 +10,14 @@ import {DialogsContainer} from "./components/dialogs/DialogsContainer";
 import {SidebarContainer} from "./components/sidebar/SidebarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/profile/ProfileContainer";
+import HeaderContainer from "./components/header/HeaderContainer";
 
 
 
 function App() {
     return (
         <div className="app-wrapper">
-            <Header/>
+            <HeaderContainer/>
             <Navbar/>
             <SidebarContainer/>
             <div className="app-wrapper-content">
