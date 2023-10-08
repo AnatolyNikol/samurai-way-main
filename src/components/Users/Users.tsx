@@ -3,6 +3,7 @@ import userPhoto from "../../assets/images/user-profile-default.png";
 import React from "react";
 import {userType} from "../../redux/usersReducer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 type usersPropsType = {
     totalUsersCount: number
@@ -53,8 +54,26 @@ function Users(props: usersPropsType) {
                 <span>
                     <div>
                         {user.followed
-                            ? <button onClick={() => props.unFollow(user.id)}>Unfollow</button>
-                            : <button onClick={() => props.follow(user.id)}>Follow</button>
+                            ? <button onClick={() => {
+                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {
+                                    withCredentials: true
+                                })
+                                    .then(response => {
+                                        if (response.data.resultCode === 0) {
+                                            props.unFollow(user.id)
+                                        }
+                                    })
+                            }}>Unfollow</button>
+                            : <button onClick={() => {
+                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {
+                                    withCredentials: true
+                                })
+                                    .then(response => {
+                                        if (response.data.resultCode === 0) {
+                                            props.follow(user.id)
+                                        }
+                                    })
+                            }}>Follow</button>
                         }
                     </div>
                 </span>
@@ -64,9 +83,7 @@ function Users(props: usersPropsType) {
                         <div>{user.status}</div>
                     </span>
                     <span>
-                        {/*<div>{user.location.country}</div>*/}
                         <div>{'user.location.country'}</div>
-                        {/*<div>{user.location.city}</div>*/}
                         <div>{'user.location.city'}</div>
                     </span>
                 </span>
