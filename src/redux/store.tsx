@@ -10,7 +10,7 @@ import {
     FollowActionType,
     setCurrentPageActionType, toggleIsFetchingActionType, setTotalUsersCountActionType,
     SetUsersActionType,
-    UnfollowActionType
+    UnfollowActionType, toggleIsFollowingActionType
 } from "./usersReducer";
 import {SetUserDataActionType} from "./auth-reducer";
 
@@ -70,6 +70,7 @@ export type ActionsTypes =
     | toggleIsFetchingActionType
     | SetUserProfileActionType
     | SetUserDataActionType
+    | toggleIsFollowingActionType
 
 
 export type StoreType = {
