@@ -1,6 +1,6 @@
 import {ActionsTypes, ProfilePageType} from "./store";
 import {Dispatch} from "redux";
-import {profileAPI} from "../api/api";
+import {usersAPI} from "../api/api";
 
 type userPhotosType = {
     small: string
@@ -106,7 +106,7 @@ export const setUserProfile = (profile: userProfileType) => {
 
 export const getUserProfile = (userId: string) => {
     return (dispatch: Dispatch) => {
-        profileAPI.getUserProfile(userId)
+        usersAPI.getUserProfile(userId)
             .then(data => {
                 dispatch(setUserProfile(data))
             })

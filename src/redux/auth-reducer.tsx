@@ -44,7 +44,7 @@ export const setAuthUserData = (id: number, email: string, login: string) => {
     } as const
 }
 
-export const auth = () => {
+export const getAuthUserData = () => {
     return(dispatch: Dispatch) => {
         authAPI.getAuth()
             .then(data => {
