@@ -6,7 +6,7 @@ import {DialogsPageType} from "../../redux/store";
 import {Redirect} from "react-router-dom";
 
 
-type DialogsPropsType = {
+export type DialogsPropsType = {
     updateNewMessageText: (message: string) => void
     addMessage: () => void
     dialogsPage: DialogsPageType
