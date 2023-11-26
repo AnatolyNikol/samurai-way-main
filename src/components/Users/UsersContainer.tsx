@@ -5,6 +5,7 @@ import {follow, getUsers, setCurrentPage, toggleFollowingProgress, unFollow, use
 import Users from "./Users";
 import Preloader from "../common/preloader/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 type usersAPIPropsType = {
@@ -64,12 +65,23 @@ let mapStateToProps = (state: AppStateType) => {
     }
 }
 
-let withRedirect = withAuthRedirect(UsersContainer);
+// let withRedirect = withAuthRedirect(UsersContainer);
+//
+// export default connect(mapStateToProps, {
+//     follow,
+//     unFollow,
+//     setCurrentPage,
+//     toggleFollowingProgress,
+//     getUsers
+// })(withRedirect);
 
-export default connect(mapStateToProps, {
-    follow,
-    unFollow,
-    setCurrentPage,
-    toggleFollowingProgress,
-    getUsers
-})(withRedirect);
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {
+        follow,
+        unFollow,
+        setCurrentPage,
+        toggleFollowingProgress,
+        getUsers
+    }),
+    withAuthRedirect
+)(UsersContainer)

@@ -5,7 +5,7 @@ import {Route} from "react-router-dom";
 import News from "./components/news/News";
 import Music from "./components/music/Music";
 import Settings from "./components/settings/Settings";
-import {DialogsContainer} from "./components/dialogs/DialogsContainer";
+import DialogsContainer from "./components/dialogs/DialogsContainer";
 import {SidebarContainer} from "./components/sidebar/SidebarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/profile/ProfileContainer";
