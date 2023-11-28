@@ -1,6 +1,6 @@
-import {ActionsTypes, ProfilePageType} from "./store";
+import {ActionsTypes} from "./store";
 import {Dispatch} from "redux";
-import {usersAPI} from "../api/api";
+import {profileAPI, usersAPI} from "../api/api";
 
 type userPhotosType = {
     small: string
@@ -27,6 +27,19 @@ export type userProfileType = {
     photos: userPhotosType
 }
 
+export type PostsType = {
+    id: number
+    message: string
+    likesCount: number
+}
+
+export type ProfilePageType = {
+    posts: Array<PostsType>
+    newPostText: string
+    profile: userProfileType
+    status: string
+}
+
 const initialState = {
     posts: [
         {id: 1, message: 'Hi, how are you?', likesCount: 15},
@@ -34,28 +47,29 @@ const initialState = {
     ],
     newPostText: '',
     profile: {
-        contacts: {
-            facebook: "facebook.com",
-            website: '',
-            vk: "vk.com/dimych",
-            twitter: "https://twitter.com/@sdf",
-            instagram: "instagra.com/sds",
-            youtube: '',
-            github: "github.com",
-            mainLink: ''
-        },
+        userId: 2,
         lookingForAJob: true,
         lookingForAJobDescription: "не ищу, а дурачусь",
         fullName: "samurai dimych",
-        userId: 2,
+        contacts: {
+            github: "github.com",
+            vk: "vk.com/dimych",
+            facebook: "facebook.com",
+            instagram: "instagra.com/sds",
+            twitter: "https://twitter.com/@sdf",
+            website: '',
+            youtube: '',
+            mainLink: ''
+        },
         photos: {
             small: "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
             large: "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
         }
-    }
+    },
+    status: ''
 };
 
-export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes) => {
+export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
     switch (action.type) {
         case 'ADD-POST': {
             let newPost = {id: 5, message: state.newPostText, likesCount: 0};
@@ -77,6 +91,12 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
                 profile: action.profile
             };
         }
+        case "SET-USER-STATUS": {
+            return {
+                ...state,
+                status: action.status
+            };
+        }
         default:
             return state;
     }
@@ -85,6 +105,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
 export type SetUserProfileActionType = ReturnType<typeof setUserProfile>
+export type SetUserStatusActionType = ReturnType<typeof setUserStatus>
 
 export const addPostActionCreator = () => {
     return {
@@ -104,11 +125,39 @@ export const setUserProfile = (profile: userProfileType) => {
     } as const
 }
 
+export const setUserStatus = (status: string) => {
+    return {
+        type: 'SET-USER-STATUS',
+        status: status
+    } as const
+}
+
+//thunks
 export const getUserProfile = (userId: string) => {
     return (dispatch: Dispatch) => {
         usersAPI.getUserProfile(userId)
             .then(data => {
                 dispatch(setUserProfile(data))
+            })
+    }
+}
+
+export const getUserStatus = (userId: string) => {
+    return (dispatch: Dispatch) => {
+        profileAPI.getStatus(userId)
+            .then(data => {
+                dispatch(setUserStatus(data))
+            })
+    }
+}
+
+export const updateUserStatus = (status: string) => {
+    return (dispatch: Dispatch) => {
+        profileAPI.updateStatus(status)
+            .then(data => {
+                if (data.data.resultCode === 0) {
+                    dispatch(setUserStatus(status))
+                }
             })
     }
 }

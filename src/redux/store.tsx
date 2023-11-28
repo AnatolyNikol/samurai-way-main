@@ -1,5 +1,5 @@
 import {
-    AddPostActionType,
+    AddPostActionType, SetUserStatusActionType,
     profileReducer,
     SetUserProfileActionType,
     UpdateNewPostTextActionType, userProfileType
@@ -14,7 +14,7 @@ import {
 } from "./usersReducer";
 import {SetUserDataActionType} from "./auth-reducer";
 
-export type PostsType = {
+type PostsType = {
     id: number
     message: string
     likesCount: number
@@ -35,10 +35,11 @@ export type FriendsType = {
     name: string
 }
 
-export type ProfilePageType = {
+type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
     profile: userProfileType
+    status: string
 }
 
 export type DialogsPageType = {
@@ -71,6 +72,7 @@ export type ActionsTypes =
     | SetUserProfileActionType
     | SetUserDataActionType
     | toggleIsFollowingActionType
+    | SetUserStatusActionType
 
 
 export type StoreType = {
@@ -107,8 +109,9 @@ let store: StoreType = {
                 photos: {
                     small: "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
                     large: "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
-                }
-            }
+                },
+            },
+            status: ''
         },
         dialogsPage: {
             dialogs: [
