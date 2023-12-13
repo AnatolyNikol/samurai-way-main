@@ -35,7 +35,7 @@ export type PostsType = {
 
 export type ProfilePageType = {
     posts: Array<PostsType>
-    newPostText: string
+    // newPostText: string
     profile: userProfileType
     status: string
 }
@@ -45,7 +45,7 @@ const initialState = {
         {id: 1, message: 'Hi, how are you?', likesCount: 15},
         {id: 2, message: 'It\'s my first post', likesCount: 20}
     ],
-    newPostText: '',
+    // newPostText: '',
     profile: {
         userId: 2,
         lookingForAJob: true,
@@ -72,19 +72,19 @@ const initialState = {
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
     switch (action.type) {
         case 'ADD-POST': {
-            let newPost = {id: 5, message: state.newPostText, likesCount: 0};
+            let newPost = {id: 5, message: action.newPostText, likesCount: 0};
             return  {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: ''
+                // newPostText: ''
             };
         }
-        case 'UPDATE-NEW-POST-TEXT': {
-            return  {
-                ...state,
-                newPostText: action.newText
-            };
-        }
+        // case 'UPDATE-NEW-POST-TEXT': {
+        //     return  {
+        //         ...state,
+        //         newPostText: action.newText
+        //     };
+        // }
         case 'SET-USER-PROFILE': {
             return  {
                 ...state,
@@ -103,13 +103,14 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
 }
 
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
-export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
+// export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
 export type SetUserProfileActionType = ReturnType<typeof setUserProfile>
 export type SetUserStatusActionType = ReturnType<typeof setUserStatus>
 
-export const addPostActionCreator = () => {
+export const addPostActionCreator = (newPostText: string) => {
     return {
-        type: 'ADD-POST'
+        type: 'ADD-POST',
+        newPostText: newPostText
     } as const
 }
 export const updateNewPostTextActionCreator = (text: string) => {

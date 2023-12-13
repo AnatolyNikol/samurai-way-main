@@ -13,26 +13,25 @@ let initialState = {
         {id: 1, message: 'Hi'},
         {id: 2, message: 'How is your it-kamasutra?'},
         {id: 3, message: 'Yo'}
-    ],
-    newMessageText: ''
+    ]
 }
 
 export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTypes) => {
     switch (action.type) {
         case 'ADD-MESSAGE' : {
-            let message = {id: 4, message: state.newMessageText}
+            let message = {id: 4, message: action.newMessageBody}
             return {
                 ...state,
                 messages: [...state.messages, message],
-                newMessageText: ''
+                // newMessageText: ''
             };
         }
-        case 'UPDATE-NEW-MESSAGE-TEXT': {
-             return {
-                ...state,
-                newMessageText: action.newMessageText
-            };
-        }
+        // case 'UPDATE-NEW-MESSAGE-TEXT': {
+        //     return {
+        //         ...state,
+        //         newMessageText: action.newMessageText
+        //     };
+        // }
         default:
             return state;
     }
@@ -40,17 +39,18 @@ export const dialogsReducer = (state: DialogsPageType = initialState, action: Ac
 
 export type AddMessageActionType = ReturnType<typeof AddMessageActionCreator>
 
-export type UpdateNewMessageTextActionType = ReturnType<typeof UpdateNewMessageTextActionCreator>
+// export type UpdateNewMessageTextActionType = ReturnType<typeof UpdateNewMessageTextActionCreator>
 
-export const AddMessageActionCreator = () => {
+export const AddMessageActionCreator = (newMessageBody: string) => {
     return {
-        type: 'ADD-MESSAGE'
+        type: 'ADD-MESSAGE',
+        newMessageBody: newMessageBody
     } as const
 }
 
-export const UpdateNewMessageTextActionCreator = (message: string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-TEXT',
-        newMessageText: message
-    } as const
-}
+// export const UpdateNewMessageTextActionCreator = (message: string) => {
+//     return {
+//         type: 'UPDATE-NEW-MESSAGE-TEXT',
+//         newMessageText: message
+//     } as const
+// }

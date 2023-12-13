@@ -33,6 +33,7 @@ const authReducer = (state: AuthReducerType = initialState, action: ActionsTypes
 export type SetUserDataActionType = ReturnType<typeof setAuthUserData>
 
 
+//action create
 export const setAuthUserData = (id: number, email: string, login: string) => {
     return {
         type: 'SET-USER-DATA',
@@ -44,6 +45,18 @@ export const setAuthUserData = (id: number, email: string, login: string) => {
     } as const
 }
 
+export const setLoginUserData = (email: string, password: string, rememberMe: boolean) => {
+    return {
+        type: 'SET-LOGIN-USER-DATA',
+        data: {
+            email: email,
+            password: password,
+            rememberMe: rememberMe
+        }
+    } as const
+}
+
+//thunks
 export const getAuthUserData = () => {
     return(dispatch: Dispatch) => {
         authAPI.getAuth()
@@ -55,5 +68,6 @@ export const getAuthUserData = () => {
             })
     }
 }
+
 
 export default authReducer;

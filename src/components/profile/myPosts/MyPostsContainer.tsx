@@ -9,29 +9,29 @@ import {Dispatch} from "redux";
 
 type mapStateToPropsType = {
     posts: Array<PostsType>
-    newPostText: string
+    // newPostText: string
 }
 
 type mapDispatchToPropsType = {
-    addPost: () => void
-    updateNewPostText: (text: string) => void
+    addPost: (newPostText: string) => void
+    // updateNewPostText: (text: string) => void
 }
 
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
         posts: state.profilePage.posts,
-        newPostText: state.profilePage.newPostText
+        // newPostText: state.profilePage.newPostText
     }
 }
 
 let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
-        addPost: () => {
-            dispatch(addPostActionCreator())
+        addPost: (newPostText: string) => {
+            dispatch(addPostActionCreator(newPostText))
         },
-        updateNewPostText: (text: string) => {
-            dispatch(updateNewPostTextActionCreator(text))
-        }
+        // updateNewPostText: (text: string) => {
+        //     dispatch(updateNewPostTextActionCreator(text))
+        // }
     }
 }
 

@@ -2,9 +2,9 @@ import {
     AddPostActionType, SetUserStatusActionType,
     profileReducer,
     SetUserProfileActionType,
-    UpdateNewPostTextActionType, userProfileType
+    userProfileType,
 } from "./profileReducer";
-import {AddMessageActionType, dialogsReducer, UpdateNewMessageTextActionType} from "./dialogsReducer";
+import {AddMessageActionType, dialogsReducer} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
 import {
     FollowActionType,
@@ -37,7 +37,7 @@ export type FriendsType = {
 
 type ProfilePageType = {
     posts: Array<PostsType>
-    newPostText: string
+    // newPostText: string
     profile: userProfileType
     status: string
 }
@@ -45,7 +45,7 @@ type ProfilePageType = {
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
-    newMessageText: string
+    // newMessageText: string
 }
 
 export type SidebarType = {
@@ -60,9 +60,9 @@ export type StateType = {
 
 export type ActionsTypes =
     AddPostActionType
-    | UpdateNewPostTextActionType
+    // | UpdateNewPostTextActionType
     | AddMessageActionType
-    | UpdateNewMessageTextActionType
+    // | UpdateNewMessageTextActionType
     | FollowActionType
     | UnfollowActionType
     | SetUsersActionType
@@ -90,7 +90,7 @@ let store: StoreType = {
                 {id: 1, message: 'Hi, how are you?', likesCount: 15},
                 {id: 2, message: 'It\'s my first post', likesCount: 20}
             ],
-            newPostText: '',
+            // newPostText: '',
             profile: {
                 contacts: {
                     facebook: "facebook.com",
@@ -127,7 +127,7 @@ let store: StoreType = {
                 {id: 2, message: 'How is your it-kamasutra?'},
                 {id: 3, message: 'Yo'}
             ],
-            newMessageText: ''
+            // newMessageText: ''
         },
         sidebar: {
             friends: [
