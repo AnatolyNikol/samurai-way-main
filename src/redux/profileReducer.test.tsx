@@ -1,4 +1,4 @@
-import {addPostActionCreator, profileReducer, updateNewPostTextActionCreator} from "./profileReducer";
+import {addPostActionCreator, profileReducer} from "./profileReducer";
 
 test('profile reducer should add new post', () => {
 
@@ -50,39 +50,3 @@ test('profile reducer should add new post', () => {
     expect(endState.posts.length).toBe(3)
 })
 
-// test('profile reducer should update new post text', () => {
-//     const startState = {
-//         posts: [
-//             {id: 1, message: 'Hi, how are you?', likesCount: 15},
-//             {id: 2, message: 'It\'s my first post', likesCount: 20}
-//         ],
-//         newPostText: '',
-//         profile: {
-//             contacts: {
-//                 facebook: "facebook.com",
-//                 website: '',
-//                 vk: "vk.com/dimych",
-//                 twitter: "https://twitter.com/@sdf",
-//                 instagram: "instagra.com/sds",
-//                 youtube: '',
-//                 github: "github.com",
-//                 mainLink: ''
-//             },
-//             lookingForAJob: true,
-//             lookingForAJobDescription: "не ищу, а дурачусь",
-//             fullName: "samurai dimych",
-//             userId: 2,
-//             photos: {
-//                 small: "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
-//                 large: "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
-//             }
-//         },
-//         status: ''
-//     };
-//
-//     const action = updateNewPostTextActionCreator('new text')
-//
-//     const endState = profileReducer(startState, action)
-//
-//     expect(endState.newPostText).toBe('new text')
-// })

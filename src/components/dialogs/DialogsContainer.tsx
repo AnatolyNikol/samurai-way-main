@@ -13,7 +13,6 @@ type MapStateToPropsType = {
 }
 
 type MapDispatchToPropsType = {
-    // updateNewMessageText: (message: string) => void
     addMessage: (newMessageBody: string) => void
 }
 
@@ -25,20 +24,11 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
-        // updateNewMessageText: (message: string) => {
-        //     dispatch(UpdateNewMessageTextActionCreator(message))
-        // },
         addMessage: (newMessageBody: string) => {
             dispatch(AddMessageActionCreator(newMessageBody))
         }
     }
 }
-
-
-
-// let AuthRedirectComponent = withAuthRedirect(Dialogs)
-//
-// export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps) (AuthRedirectComponent);
 
 export default compose<React.ComponentType>(
     connect(mapStateToProps, mapDispatchToProps),

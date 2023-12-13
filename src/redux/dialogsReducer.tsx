@@ -23,15 +23,8 @@ export const dialogsReducer = (state: DialogsPageType = initialState, action: Ac
             return {
                 ...state,
                 messages: [...state.messages, message],
-                // newMessageText: ''
             };
         }
-        // case 'UPDATE-NEW-MESSAGE-TEXT': {
-        //     return {
-        //         ...state,
-        //         newMessageText: action.newMessageText
-        //     };
-        // }
         default:
             return state;
     }
@@ -39,18 +32,9 @@ export const dialogsReducer = (state: DialogsPageType = initialState, action: Ac
 
 export type AddMessageActionType = ReturnType<typeof AddMessageActionCreator>
 
-// export type UpdateNewMessageTextActionType = ReturnType<typeof UpdateNewMessageTextActionCreator>
-
 export const AddMessageActionCreator = (newMessageBody: string) => {
     return {
         type: 'ADD-MESSAGE',
         newMessageBody: newMessageBody
     } as const
 }
-
-// export const UpdateNewMessageTextActionCreator = (message: string) => {
-//     return {
-//         type: 'UPDATE-NEW-MESSAGE-TEXT',
-//         newMessageText: message
-//     } as const
-// }

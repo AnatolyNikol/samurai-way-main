@@ -35,7 +35,6 @@ export type PostsType = {
 
 export type ProfilePageType = {
     posts: Array<PostsType>
-    // newPostText: string
     profile: userProfileType
     status: string
 }
@@ -76,15 +75,8 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
             return  {
                 ...state,
                 posts: [...state.posts, newPost],
-                // newPostText: ''
             };
         }
-        // case 'UPDATE-NEW-POST-TEXT': {
-        //     return  {
-        //         ...state,
-        //         newPostText: action.newText
-        //     };
-        // }
         case 'SET-USER-PROFILE': {
             return  {
                 ...state,
@@ -103,7 +95,6 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
 }
 
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
-// export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
 export type SetUserProfileActionType = ReturnType<typeof setUserProfile>
 export type SetUserStatusActionType = ReturnType<typeof setUserStatus>
 
