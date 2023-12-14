@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
 
 const instance = axios.create({
     withCredentials: true,
@@ -26,15 +26,23 @@ export const usersAPI = {
 
 export const authAPI = {
     me() {
-        return instance.get(`auth/me`)
+        return instance.get<ResponseType<{ id: number, email: string, login: string }>, AxiosResponse<ResponseType<{
+            id: number,
+            email: string,
+            login: string
+        }>>, {}>(`auth/me`)
             .then(response => response.data)
     },
     login(email: string, password: string, rememberMe: boolean = false) {
-        return instance.post(`/auth/login`, {email, password, rememberMe})
+        return instance.post<ResponseType<{ userId: number }>, AxiosResponse<ResponseType<{ userId: number }>>, {
+            email: string,
+            password: string,
+            rememberMe: boolean
+        }>(`/auth/login`, {email, password, rememberMe})
             .then(response => response.data)
     },
     logout() {
-        return instance.delete(`/auth/login`)
+        return instance.delete<ResponseType>(`/auth/login`)
             .then(response => response.data)
     },
 }
@@ -45,11 +53,19 @@ export const profileAPI = {
             .then(response => response.data)
     },
     getStatus(id: string) {
-        return instance.get(`profile/status/${id}` )
+        return instance.get(`profile/status/${id}`)
             .then(response => response.data)
     },
     updateStatus(status: string) {
-        return instance.put(`profile/status/`, {status: status})
+        return instance.put<ResponseType>(`profile/status/`, {status: status})
             .then(response => response.data)
     }
 }
+
+type ResponseType<D = {}> = {
+    resultCode: number
+    messages: string[],
+    data: D
+}
+
+
