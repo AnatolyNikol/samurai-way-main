@@ -52,7 +52,7 @@ export const setAuthUserData = (id: number | null, email: string | null, login: 
 //thunks
 export const getAuthUserData = () => {
     return (dispatch: Dispatch) => {
-        authAPI.me()
+        return authAPI.me()
             .then(data => {
                 if (data.resultCode === 0) {
                     let {id, email, login} = data.data;

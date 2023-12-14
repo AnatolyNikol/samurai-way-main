@@ -37,6 +37,9 @@ class ProfileContainer extends React.Component<ProfileAPIPropsType, any> {
 
         if (!userId) {
             userId = JSON.stringify(this.props.id);
+            if (!userId) {
+                this.props.history.push('/login')
+            }
         }
 
         this.props.getUserProfile(userId)
