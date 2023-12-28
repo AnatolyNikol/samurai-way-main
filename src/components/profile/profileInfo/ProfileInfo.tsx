@@ -2,7 +2,6 @@ import React from "react";
 import style from "./ProfileInfo.module.css";
 import {userProfileType} from "../../../redux/profileReducer";
 import Preloader from "../../common/preloader/Preloader";
-import ProfileStatus from "./ProfileStatus";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 type profileInfoPropsType = {
@@ -14,7 +13,7 @@ type profileInfoPropsType = {
 function ProfileInfo(props: profileInfoPropsType) {
 
     if (!props.profile) {
-        return  <Preloader/>
+        return <Preloader/>
     }
     return (
         <div>
