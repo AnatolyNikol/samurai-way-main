@@ -37,11 +37,13 @@ type usersAPIPropsType = {
 class UsersContainer extends React.Component<usersAPIPropsType, any> {
 
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize);
+        const {currentPage, pageSize} = this.props
+        this.props.getUsers(currentPage, pageSize);
     }
 
     onPageChanged = (page: number) => {
-        this.props.getUsers(page, this.props.pageSize);
+        const {pageSize} = this.props
+        this.props.getUsers(page, pageSize);
     }
 
     render() {
@@ -76,16 +78,6 @@ let mapStateToProps = (state: AppStateType) => {
     }
 }
 
-// let withRedirect = withAuthRedirect(UsersContainer);
-//
-// export default connect(mapStateToProps, {
-//     follow,
-//     unFollow,
-//     setCurrentPage,
-//     toggleFollowingProgress,
-//     getUsers
-// })(withRedirect);
-
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {
         follow,
@@ -94,5 +86,4 @@ export default compose<React.ComponentType>(
         toggleFollowingProgress,
         getUsers: requestUsers
     }),
-    // withAuthRedirect
 )(UsersContainer)

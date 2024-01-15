@@ -4,6 +4,8 @@ import {authAPI} from "../api/api";
 import {AppThunkDispatch} from "./redux-store";
 import {stopSubmit} from "redux-form";
 
+const SET_USER_DATA = 'samurai-network/auth/SET-USER-DATA'
+
 
 type AuthReducerType = {
     id: number | null,
@@ -22,7 +24,7 @@ let initialState = {
 
 const authReducer = (state: AuthReducerType = initialState, action: ActionsTypes) => {
     switch (action.type) {
-        case 'SET-USER-DATA':
+        case SET_USER_DATA:
             return {
                 ...state,
                 ...action.payload
@@ -38,7 +40,7 @@ export type SetUserDataActionType = ReturnType<typeof setAuthUserData>
 //action create
 export const setAuthUserData = (id: number | null, email: string | null, login: string | null, isAuth: boolean) => {
     return {
-        type: 'SET-USER-DATA',
+        type: SET_USER_DATA,
         payload: {
             id: id,
             email: email,
@@ -50,41 +52,33 @@ export const setAuthUserData = (id: number | null, email: string | null, login: 
 
 
 //thunks
-export const getAuthUserData = () => {
-    return (dispatch: Dispatch) => {
-        return authAPI.me()
-            .then(data => {
-                if (data.resultCode === 0) {
-                    let {id, email, login} = data.data;
-                    dispatch(setAuthUserData(id, email, login, true))
-                }
-            })
+export const getAuthUserData = () => async (dispatch: Dispatch) => {
+    const data = await authAPI.me()
+
+    if (data.resultCode === 0) {
+        let {id, email, login} = data.data;
+        dispatch(setAuthUserData(id, email, login, true))
     }
 }
 
-export const login = (email: string, password: string, rememberMe: boolean) => {
 
-    return (dispatch: AppThunkDispatch) => {
-        authAPI.login(email, password, rememberMe)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(getAuthUserData())
-                } else {
-                    let message = data.messages.length > 0 ? data.messages[0] : 'Some error'
-                    dispatch(stopSubmit('login', {_error: message}))
-                }
-            })
+export const login = (email: string, password: string, rememberMe: boolean) => async (dispatch: AppThunkDispatch) => {
+    const data = await authAPI.login(email, password, rememberMe)
+
+    if (data.resultCode === 0) {
+        dispatch(getAuthUserData())
+    } else {
+        let message = data.messages.length > 0 ? data.messages[0] : 'Some error'
+        dispatch(stopSubmit('login', {_error: message}))
     }
 }
 
-export const logout = () => {
-    return (dispatch: Dispatch) => {
-        authAPI.logout()
-            .then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(setAuthUserData(null, null, null, false))
-                }
-            })
+
+export const logout = () => async (dispatch: Dispatch) => {
+    const data = await authAPI.logout()
+
+    if (data.resultCode === 0) {
+        dispatch(setAuthUserData(null, null, null, false))
     }
 }
 

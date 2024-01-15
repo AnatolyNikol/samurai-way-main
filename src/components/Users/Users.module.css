@@ -4,15 +4,3 @@
     border-radius: 50px;
 }
 
-.selectedPage {
-    font-weight: bold;
-    padding-right: 10px;
-}
-
-.page {
-    padding-right: 10px;
-}
-
-.pagesContainer {
-    cursor: pointer;
-}

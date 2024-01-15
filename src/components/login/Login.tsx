@@ -1,5 +1,5 @@
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Input, Textarea} from "../common/FormsControls/FormsControls";
+import {Input} from "../common/FormsControls/FormsControls";
 import {required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
@@ -19,9 +19,9 @@ type LoginPropsType = {
     isAuth: boolean
 }
 
-function LoginForm(props: InjectedFormProps<FormDataType>) {
+function LoginForm({handleSubmit, error}: InjectedFormProps<FormDataType>) {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <Field placeholder={'Login'}
                        validate={[required]}
@@ -36,9 +36,12 @@ function LoginForm(props: InjectedFormProps<FormDataType>) {
                        component={Input}/>
             </div>
             <div>
-                <Field type={'checkbox'} name={'rememberMe'} component={Input}/> remember me
+                <Field type={'checkbox'}
+                       name={'rememberMe'}
+                       component={Input}/>
+                remember me
             </div>
-            {props.error && <div className={styles.formSummaryError}>{props.error}</div>}
+            {error && <div className={styles.formSummaryError}>{error}</div>}
             <div>
                 <button>Login</button>
             </div>

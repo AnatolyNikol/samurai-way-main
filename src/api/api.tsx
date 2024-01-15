@@ -26,7 +26,7 @@ export const usersAPI = {
 
 export const authAPI = {
     me() {
-        return instance.get<ResponseType<{ id: number, email: string, login: string }>, AxiosResponse<ResponseType<{
+        return instance.get<APIResponseType<{ id: number, email: string, login: string }>, AxiosResponse<APIResponseType<{
             id: number,
             email: string,
             login: string
@@ -34,7 +34,7 @@ export const authAPI = {
             .then(response => response.data)
     },
     login(email: string, password: string, rememberMe: boolean = false) {
-        return instance.post<ResponseType<{ userId: number }>, AxiosResponse<ResponseType<{ userId: number }>>, {
+        return instance.post<APIResponseType<{ userId: number }>, AxiosResponse<APIResponseType<{ userId: number }>>, {
             email: string,
             password: string,
             rememberMe: boolean
@@ -42,7 +42,7 @@ export const authAPI = {
             .then(response => response.data)
     },
     logout() {
-        return instance.delete<ResponseType>(`/auth/login`)
+        return instance.delete<APIResponseType>(`/auth/login`)
             .then(response => response.data)
     },
 }
@@ -57,12 +57,12 @@ export const profileAPI = {
             .then(response => response.data)
     },
     updateStatus(status: string) {
-        return instance.put<ResponseType>(`profile/status/`, {status: status})
+        return instance.put<APIResponseType>(`profile/status/`, {status: status})
             .then(response => response.data)
     }
 }
 
-type ResponseType<D = {}> = {
+export type APIResponseType<D = {}> = {
     resultCode: number
     messages: string[],
     data: D
