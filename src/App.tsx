@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from "./components/navbar/Navbar";
-import {Route, withRouter} from "react-router-dom";
+import {BrowserRouter, Route, withRouter} from "react-router-dom";
 import News from "./components/news/News";
 import Music from "./components/music/Music";
 import Settings from "./components/settings/Settings";
@@ -11,10 +11,10 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/profile/ProfileContainer";
 import HeaderContainer from "./components/header/HeaderContainer";
 import Login from "./components/login/Login";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/appReducer";
-import {AppStateType} from "./redux/redux-store";
+import {AppStateType, store} from "./redux/redux-store";
 import Preloader from "./components/common/preloader/Preloader";
 
 
@@ -66,9 +66,17 @@ type AppPropsType = {
 const mapStateToProps = (state: AppStateType) => ({
     initialized: state.app.initialized
 })
-export default compose<React.ComponentType>(
+let AppContainer = compose<React.ComponentType>(
     withRouter,
     connect(mapStateToProps, {
         initializeApp
     })
 )(App);
+
+export const SamuraiJSApp = () => {
+   return <BrowserRouter>
+        <Provider store={store}>
+            <AppContainer/>
+        </Provider>
+    </BrowserRouter>
+}

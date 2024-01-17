@@ -39,35 +39,6 @@ beforeEach(() => {
 
 test('profile reducer should add new post', () => {
 
-    // const startState = {
-    //     posts: [
-    //         {id: 1, message: 'Hi, how are you?', likesCount: 15},
-    //         {id: 2, message: 'It\'s my first post', likesCount: 20}
-    //     ],
-    //     newPostText: '',
-    //     profile: {
-    //         contacts: {
-    //             facebook: "facebook.com",
-    //             website: '',
-    //             vk: "vk.com/dimych",
-    //             twitter: "https://twitter.com/@sdf",
-    //             instagram: "instagra.com/sds",
-    //             youtube: '',
-    //             github: "github.com",
-    //             mainLink: ''
-    //         },
-    //         lookingForAJob: true,
-    //         lookingForAJobDescription: "не ищу, а дурачусь",
-    //         fullName: "samurai dimych",
-    //         userId: 2,
-    //         photos: {
-    //             small: "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
-    //             large: "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
-    //         }
-    //     },
-    //     status: ''
-    // };
-
     const newPost = {id: 5, message: startState.newPostText, likesCount: 0};
 
     const action = addPostActionCreator('')
