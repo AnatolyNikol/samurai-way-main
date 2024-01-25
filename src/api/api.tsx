@@ -1,4 +1,5 @@
 import axios, {AxiosResponse} from "axios";
+import {userPhotosType} from "../redux/profileReducer";
 
 const instance = axios.create({
     withCredentials: true,
@@ -58,6 +59,16 @@ export const profileAPI = {
     },
     updateStatus(status: string) {
         return instance.put<APIResponseType>(`profile/status/`, {status: status})
+            .then(response => response.data)
+    },
+    savePhoto(file: any) {
+        const formData = new FormData()
+        formData.append('image', file)
+        return instance.put<APIResponseType<{photos: userPhotosType}>>(`profile/photo/`, formData, {
+            headers: {
+                'Content-Type':'multipart/form-data'
+            }
+        })
             .then(response => response.data)
     }
 }

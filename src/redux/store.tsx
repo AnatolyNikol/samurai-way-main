@@ -2,7 +2,7 @@ import {
     AddPostActionType, SetUserStatusActionType,
     profileReducer,
     SetUserProfileActionType,
-    userProfileType, DeletePostActionType,
+    userProfileType, DeletePostActionType, SavePhotoSuccessActionType,
 } from "./profileReducer";
 import {AddMessageActionType, dialogsReducer} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
@@ -74,6 +74,7 @@ export type ActionsTypes =
     | toggleIsFollowingActionType
     | SetUserStatusActionType
     | DeletePostActionType
+    | SavePhotoSuccessActionType
 
 
 export type StoreType = {
