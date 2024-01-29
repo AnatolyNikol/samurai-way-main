@@ -1,5 +1,5 @@
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Input} from "../common/FormsControls/FormsControls";
+import {InjectedFormProps, reduxForm} from "redux-form";
+import {createField, Input} from "../common/FormsControls/FormsControls";
 import {required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
@@ -11,37 +11,19 @@ type FormDataType = {
     email: string
     password: string
     rememberMe: boolean
-
 }
 
-type LoginPropsType = {
-    login: (email: string, password: string, rememberMe: boolean) => void
-    isAuth: boolean
-}
+
 
 function LoginForm({handleSubmit, error}: InjectedFormProps<FormDataType>) {
     return (
         <form onSubmit={handleSubmit}>
-            <div>
-                <Field placeholder={'Login'}
-                       validate={[required]}
-                       name={'email'}
-                       component={Input}/>
-            </div>
-            <div>
-                <Field placeholder={'Password'}
-                       type={'password'}
-                       validate={[required]}
-                       name={'password'}
-                       component={Input}/>
-            </div>
-            <div>
-                <Field type={'checkbox'}
-                       name={'rememberMe'}
-                       component={Input}/>
-                remember me
-            </div>
+            {createField('Login', 'email', [required], Input)}
+            {createField('Password', 'password', [required], Input, {type: 'password'})}
+            {createField(undefined, 'rememberMe', [], Input, {type: 'checkbox'}, 'remember me')}
+
             {error && <div className={styles.formSummaryError}>{error}</div>}
+
             <div>
                 <button>Login</button>
             </div>
@@ -53,6 +35,11 @@ const LoginReduxForm = reduxForm<FormDataType>({
     form: 'login'
 })(LoginForm)
 
+
+type LoginPropsType = {
+    login: (email: string, password: string, rememberMe: boolean) => void
+    isAuth: boolean
+}
 const Login = (props: LoginPropsType) => {
     const onSubmit = (formData: FormDataType) => {
         props.login(formData.email, formData.password, formData.rememberMe)

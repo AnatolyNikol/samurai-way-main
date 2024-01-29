@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import {userPhotosType} from "../redux/profileReducer";
+import {userPhotosType, userProfileType} from "../redux/profileReducer";
 
 const instance = axios.create({
     withCredentials: true,
@@ -64,11 +64,33 @@ export const profileAPI = {
     savePhoto(file: any) {
         const formData = new FormData()
         formData.append('image', file)
-        return instance.put<APIResponseType<{photos: userPhotosType}>>(`profile/photo/`, formData, {
+        return instance.put<APIResponseType<SavePhotoResponseDataType>>(`profile/photo/`, formData, {
             headers: {
                 'Content-Type':'multipart/form-data'
             }
         })
+            .then(response => response.data)
+    },
+    saveProfile(formData: userProfileType) {
+        // const data: userProfileType = {
+        //     userId: formData.userId,
+        //     lookingForAJob: formData.lookingForAJob,
+        //     lookingForAJobDescription: formData.lookingForAJobDescription,
+        //     fullName: formData.fullName,
+        //     photos: formData.photos,
+        //     aboutMe: formData.aboutMe,
+        //     contacts: {
+        //         github: formData.contacts.github,
+        //         vk: formData.contacts.vk,
+        //         facebook: formData.contacts.facebook,
+        //         instagram: formData.contacts.instagram,
+        //         twitter: formData.contacts.twitter,
+        //         website: formData.contacts.website,
+        //         youtube: formData.contacts.youtube,
+        //         mainLink: formData.contacts.mainLink
+        //     }
+        // }
+        return instance.put<APIResponseType<userProfileType>>(`profile`, formData)
             .then(response => response.data)
     }
 }
@@ -77,6 +99,10 @@ export type APIResponseType<D = {}> = {
     resultCode: number
     messages: string[],
     data: D
+}
+
+type SavePhotoResponseDataType = {
+    photos: userPhotosType
 }
 
 
