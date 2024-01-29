@@ -12,7 +12,7 @@ import {
     SetUsersActionType,
     UnfollowActionType, toggleIsFollowingActionType
 } from "./usersReducer";
-import {SetUserDataActionType} from "./auth-reducer";
+import {SetCaptchaUrlActionType, SetUserDataActionType} from "./auth-reducer";
 
 type PostsType = {
     id: number
@@ -75,6 +75,7 @@ export type ActionsTypes =
     | SetUserStatusActionType
     | DeletePostActionType
     | SavePhotoSuccessActionType
+    | SetCaptchaUrlActionType
 
 
 export type StoreType = {

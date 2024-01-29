@@ -27,19 +27,24 @@ export const usersAPI = {
 
 export const authAPI = {
     me() {
-        return instance.get<APIResponseType<{ id: number, email: string, login: string }>, AxiosResponse<APIResponseType<{
+        return instance.get<APIResponseType<{
+            id: number,
+            email: string,
+            login: string
+        }>, AxiosResponse<APIResponseType<{
             id: number,
             email: string,
             login: string
         }>>, {}>(`auth/me`)
             .then(response => response.data)
     },
-    login(email: string, password: string, rememberMe: boolean = false) {
+    login(email: string, password: string, rememberMe: boolean = false, captcha: null | string) {
         return instance.post<APIResponseType<{ userId: number }>, AxiosResponse<APIResponseType<{ userId: number }>>, {
             email: string,
             password: string,
-            rememberMe: boolean
-        }>(`/auth/login`, {email, password, rememberMe})
+            rememberMe: boolean,
+            captcha: null | string
+        }>(`/auth/login`, {email, password, rememberMe, captcha})
             .then(response => response.data)
     },
     logout() {
@@ -66,32 +71,20 @@ export const profileAPI = {
         formData.append('image', file)
         return instance.put<APIResponseType<SavePhotoResponseDataType>>(`profile/photo/`, formData, {
             headers: {
-                'Content-Type':'multipart/form-data'
+                'Content-Type': 'multipart/form-data'
             }
         })
             .then(response => response.data)
     },
     saveProfile(formData: userProfileType) {
-        // const data: userProfileType = {
-        //     userId: formData.userId,
-        //     lookingForAJob: formData.lookingForAJob,
-        //     lookingForAJobDescription: formData.lookingForAJobDescription,
-        //     fullName: formData.fullName,
-        //     photos: formData.photos,
-        //     aboutMe: formData.aboutMe,
-        //     contacts: {
-        //         github: formData.contacts.github,
-        //         vk: formData.contacts.vk,
-        //         facebook: formData.contacts.facebook,
-        //         instagram: formData.contacts.instagram,
-        //         twitter: formData.contacts.twitter,
-        //         website: formData.contacts.website,
-        //         youtube: formData.contacts.youtube,
-        //         mainLink: formData.contacts.mainLink
-        //     }
-        // }
         return instance.put<APIResponseType<userProfileType>>(`profile`, formData)
             .then(response => response.data)
+    }
+}
+
+export const securityAPI = {
+    getCaptchaUrl() {
+        return instance.get<CaptchaResponseType>(`security/get-captcha-url`)
     }
 }
 
@@ -99,6 +92,10 @@ export type APIResponseType<D = {}> = {
     resultCode: number
     messages: string[],
     data: D
+}
+
+type CaptchaResponseType = {
+    url: string
 }
 
 type SavePhotoResponseDataType = {
