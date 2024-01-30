@@ -79,9 +79,6 @@ class ProfileContainer extends React.Component<ProfileAPIPropsType, any> {
     }
 }
 
-
-// let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
-//
 let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         profile: state.profilePage.profile,
@@ -90,9 +87,6 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
         isAuth: state.auth.isAuth
     }
 }
-//
-// let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent);
-// export default connect(mapStateToProps,{getUserProfile})(WithUrlDataContainerComponent);
 
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {getUserProfile, getUserStatus, updateUserStatus, savePhoto, saveProfile}),

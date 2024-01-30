@@ -1,7 +1,7 @@
-import React, {Suspense} from 'react';
+import React from 'react';
 import './App.css';
 import Navbar from "./components/navbar/Navbar";
-import {BrowserRouter, Route, withRouter} from "react-router-dom";
+import {BrowserRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
 import News from "./components/news/News";
 import Music from "./components/music/Music";
 import Settings from "./components/settings/Settings";
@@ -17,16 +17,22 @@ import Preloader from "./components/common/preloader/Preloader";
 import {withSuspense} from "./hoc/withSuspanse";
 
 const DialogsContainer = React.lazy(() => import("./components/dialogs/DialogsContainer"))
-// import DialogsContainer from "./components/dialogs/DialogsContainer";
-const ProfileContainer = React.lazy(() => import("./components/profile/ProfileContainer"))
 
-// import ProfileContainer from "./components/profile/ProfileContainer";
+const ProfileContainer = React.lazy(() => import("./components/profile/ProfileContainer"))
 
 
 class App extends React.Component<AppPropsType> {
+    catchAllUnhandledErrors = (promiseRejectionEvent: any) => {
+        alert('Some error occurred')
+    }
 
     componentDidMount() {
         this.props.initializeApp()
+        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
     }
 
     render() {
@@ -40,24 +46,26 @@ class App extends React.Component<AppPropsType> {
                 <Navbar/>
                 <SidebarContainer/>
                 <div className="app-wrapper-content">
-                    {/*<Route path="/profile:userId?" render={() => {*/}
-                    {/*    return <Suspense fallback={<Preloader/>}>*/}
-                    {/*        <ProfileContainer/>*/}
-                    {/*    </Suspense>*/}
-                    {/*}*/}
-                    {/*}/>*/}
-                    <Route path="/profile:userId?" render={withSuspense(ProfileContainer)}/>
-                    {/*<Route path="/dialogs" render={() => {*/}
-                    {/*    return <Suspense fallback={<Preloader/>}>*/}
-                    {/*        <DialogsContainer/>*/}
-                    {/*    </Suspense>*/}
-                    {/*}}/>*/}
-                    <Route path="/dialogs" render={withSuspense(DialogsContainer)}/>
-                    <Route path="/users" render={() => <UsersContainer/>}/>
-                    <Route path="/news" render={() => <News/>}/>
-                    <Route path="/music" render={() => <Music/>}/>
-                    <Route path="/settings" render={() => <Settings/>}/>
-                    <Route path="/login" render={() => <Login/>}/>
+                    <Switch>
+                        <Route exact path='/'
+                               render={() => <Redirect to={'/profile'}/>}/>
+                        <Route path="/profile:userId?"
+                               render={withSuspense(ProfileContainer)}/>
+                        <Route path="/dialogs"
+                               render={withSuspense(DialogsContainer)}/>
+                        <Route path="/users"
+                               render={() => <UsersContainer/>}/>
+                        <Route path="/news"
+                               render={() => <News/>}/>
+                        <Route path="/music"
+                               render={() => <Music/>}/>
+                        <Route path="/settings"
+                               render={() => <Settings/>}/>
+                        <Route path="/login"
+                               render={() => <Login/>}/>
+                        <Route exact path="*"
+                               render={() => <div>404 NOT FOUND</div>}/>
+                    </Switch>
                 </div>
             </div>
         );
